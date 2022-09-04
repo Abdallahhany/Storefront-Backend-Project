@@ -5,12 +5,96 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 #### Products
-- Index 
+    /api/products
+- Index
+  -     /all [GET]
+    Response on success: Status 200
+    ```json 
+    [{
+       'id': number,
+       'name': string,
+       'price': number,
+       'category': string
+    }]
+    ```
 - Show
+  -     /product/:id [GET]
+  - Response on success: Status 200
+    ```json 
+    {
+        'id': number
+        'name': string,
+        'price': number,
+        'category': string
+    }
+    ```
+
 - Create [token required]
+    - Not add token yet
+    -     /add [POST]
+    - JSON Body Object:
+        ```json 
+        {
+            'name': string,
+            'price': number,
+            'category': string
+        }
+        ```
+
+    - Response on success: Status 201
+      ```json 
+      {
+          'id': number
+          'name': string,
+          'price': number,
+          'category': string
+      }
+      ```
+- Update [token required]
+  - Not add token yet
+  -     /product/:id [PUT]
+  - JSON Body Object:
+    ```json 
+    {
+        'name': string,
+        'price': number,
+        'category': string
+    }
+    ```
+
+  - Response on success: Status 201
+    ```json 
+    {
+        'id': number
+        'name': string,
+        'price': number,
+        'category': string
+    }
+    ```
+- delete
+    -     /product/:id [DELETE]
+    - Response on success: Status 200
+      ```json 
+      {
+          'id': number
+          'name': string,
+          'price': number,
+          'category': string
+      }
+      ```
+
 - [OPTIONAL] Top 5 most popular products 
 - [OPTIONAL] Products by category (args: product category)
-
+    -     /product_by_cat/:cat [GET]
+    - Response on success: Status 200
+      ```json 
+      {
+          'id': number
+          'name': string,
+          'price': number,
+          'category': string
+      }
+      ```
 #### Users
 - Index [token required]
 - Show [token required]

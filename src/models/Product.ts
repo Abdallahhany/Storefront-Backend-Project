@@ -28,7 +28,7 @@ export class ProductModel {
     }
   }
 
-  async show(productId: string): Promise<Product> {
+  async show(productId: number): Promise<Product> {
     try {
       const conn = await Client.connect();
 
@@ -44,10 +44,10 @@ export class ProductModel {
     }
   }
 
-  async Create(prod: Product): Promise<Product> {
+  async create(prod: Product): Promise<Product> {
     try {
       const sql =
-        "INSERT INTO users (name, price, category) VALUES($1, $2, $3) RETURNING *";
+        "INSERT INTO products (name, price, category) VALUES($1, $2, $3) RETURNING *";
 
       const conn = await Client.connect();
 
@@ -79,9 +79,9 @@ export class ProductModel {
     }
   }
 
-  async deleteProduct(id: string): Promise<Product> {
+  async deleteProduct(id: number): Promise<Product> {
     try {
-      const sql = "DELETE FROM products WHERE id=($1)";
+      const sql = "DELETE FROM products WHERE id=($1) RETURNING * ";
 
       const conn = await Client.connect();
 
