@@ -4,8 +4,12 @@ import bodyParser from "body-parser";
 const app: express.Application = express();
 const address: string = "0.0.0.0:3000";
 
+// built in middlewares
 app.use(bodyParser.json());
 
+// application middlewares
+
+//default middleware
 app.get("/", function (req: Request, res: Response) {
   res.send("Hello World!");
 });
