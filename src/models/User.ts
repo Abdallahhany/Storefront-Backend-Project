@@ -86,6 +86,10 @@ export class UserModel {
             }
             const realPassword = result.rows[0]['password'];
 
+            if(!bcryptKey){
+                throw new Error('Missing env variable: bcryptKey')
+            }
+
             const isMatched = await bcrypt.compare(`${password}${bcryptKey}`, realPassword);
             if (!isMatched) {
                 conn.release();
@@ -140,6 +144,10 @@ export class UserModel {
             let result = await conn.query(sql, [id]);
 
             const password = result.rows[0]["password"];
+            if(!bcryptKey){
+                throw new Error('Missing env variable: bcryptKey')
+            }
+
             const isMatched = await bcrypt.compare(`${oldPassword}${bcryptKey}`, password);
 
             if (!isMatched) {
@@ -187,6 +195,9 @@ export class UserModel {
 }
 
 const hashPassword = async (password: string) => {
+    if (!saltRounds || !bcryptKey) {
+        return new Error('Missing ENV variables')
+    }
     const salt = await bcrypt.genSalt(parseInt(saltRounds!, 10));
     return await bcrypt.hash(`${password}${bcryptKey}`, salt);
 };

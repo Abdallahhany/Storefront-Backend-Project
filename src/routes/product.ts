@@ -1,5 +1,6 @@
 import express, {Request, Response} from 'express';
 import {Product, ProductModel} from "../models/Product";
+import verifyAuthToken from "../middellwares/auth";
 
 const productModel = new ProductModel();
 const productRouter = express.Router();
@@ -103,9 +104,9 @@ const updateProduct = async (req: Request, res: Response): Promise<void> => {
 
 productRouter.get('/all', getAllProducts);
 productRouter.get('/product/:id', getSingleProduct);
-productRouter.post('/add', addProduct);
+productRouter.post('/add', verifyAuthToken, addProduct);//token required
 productRouter.get('/product_by_cat/:cat', getProductsByCat);
-productRouter.delete('/product/:id', deleteProduct);
-productRouter.put('/product/:id', updateProduct);
+productRouter.delete('/product/:id', verifyAuthToken, deleteProduct);//token required
+productRouter.put('/product/:id', verifyAuthToken, updateProduct);//token required
 
 export default productRouter;

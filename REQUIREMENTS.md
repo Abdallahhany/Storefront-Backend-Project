@@ -4,6 +4,8 @@ The company stakeholders want to create an online storefront to showcase their g
 These are the notes from a meeting with the frontend developer that describe what endpoints the API needs to supply, as well as data shapes the frontend and backend have agreed meet the requirements of the application. 
 
 ## API Endpoints
+    0.0.0.0:3000
+
 #### Products
     /api/products
 - Index
@@ -30,7 +32,7 @@ These are the notes from a meeting with the frontend developer that describe wha
     ```
 
 - Create [token required]
-    - Not add token yet
+    - Needed Header: Authorization - Bearer + Token
     -     /add [POST]
     - JSON Body Object:
         ```json 
@@ -51,7 +53,7 @@ These are the notes from a meeting with the frontend developer that describe wha
       }
       ```
 - Update [token required]
-  - Not add token yet
+  - Needed Header: Authorization - Bearer + Token
   -     /product/:id [PUT]
   - JSON Body Object:
     ```json 
@@ -72,16 +74,17 @@ These are the notes from a meeting with the frontend developer that describe wha
     }
     ```
 - delete
-    -     /product/:id [DELETE]
-    - Response on success: Status 200
-      ```json 
-      {
-          'id': number
-          'name': string,
-          'price': number,
-          'category': string
-      }
-      ```
+  - Needed Header: Authorization - Bearer + Token
+  -     /product/:id [DELETE]
+  - Response on success: Status 200
+    ```json 
+    {
+        'id': number
+        'name': string,
+        'price': number,
+        'category': string
+    }
+    ```
 
 - [OPTIONAL] Top 5 most popular products 
 - [OPTIONAL] Products by category (args: product category)
@@ -96,10 +99,129 @@ These are the notes from a meeting with the frontend developer that describe wha
       }
       ```
 #### Users
+    /api/users
 - Index [token required]
+  - Needed Header: Authorization - Bearer + Token
+  -     /all [GET]
+    Response on success: Status 200
+    ```json 
+    [{
+       'id': number,
+       'firstName': string,
+       'lastName': string,
+       'email': string
+    }]
+    ```
 - Show [token required]
+  - Needed Header: Authorization - Bearer + Token
+  -     /user/:id [GET]
+    Response on success: Status 200
+    ```json 
+    {
+       'id': number,
+       'firstName': string,
+       'lastName': string,
+       'email': string
+    }
+    ```
 - Create N[token required]
+  -     /register [POST]
+  - JSON Body Object:
+      ```json 
+      {
+        'firstName': string,
+        'lastName': string,
+        'email': string,
+        'password':string
+      }
+      ```
 
+  - Response on success: Status 201
+    ```json 
+    {
+      'id': number
+      'firstName': string,
+      'lastName': string,
+      'email': string,
+    }
+    ```
+- Login N[token required]
+  -     /login [POST]
+  - JSON Body Object:
+      ```json 
+      {
+        'email': string,
+        'password':string
+      }
+      ```
+  - Response on success: Status 200 and JWT Token
+    ```json 
+    {
+      {
+        'id': number
+        'firstName': string,
+        'lastName': string,
+        'email': string,
+      },
+      'token':string (SHA256)
+    }
+    ```
+- Update [token required]
+  - Needed Header: Authorization - Bearer + Token
+  -     /user [PUT]
+  - JSON Body Object:
+    ```json 
+    {
+        'firstName': string,
+        'lastName': string,
+        'email': string
+    }
+    ```
+
+  - Response on success: Status 201
+    ```json 
+    {
+        'id': number
+        'firstName': string,
+        'lastName': string,
+        'email': string
+    }
+    ```
+- change Password [token required]
+  - Needed Header: Authorization - Bearer + Token
+  -     /user_password [PUT]
+  - JSON Body Object:
+    ```json 
+    {
+        'oldPassword': string,
+        'newPassword': string,
+    }
+    ```
+
+  - Response on success: Status 201 and JWT token
+    ```json 
+    {
+      {
+        'id': number
+        'firstName': string,
+        'lastName': string,
+        'email': string
+      },
+      token:string (SHA256)
+    }
+    ```
+- delete
+  - Needed Header: Authorization - Bearer + Token
+  -     /user [DELETE]
+  - Response on success: Status 200
+    ```json 
+    {
+        'id': number
+        'name': string,
+        'price': number,
+        'category': string
+    }
+    ```
 #### Orders
 - Current Order by user (args: user id)[token required]
 - [OPTIONAL] Completed Orders by user (args: user id)[token required]

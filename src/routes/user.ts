@@ -1,15 +1,32 @@
 import express, {Request, Response} from 'express';
 import {User, UserModel} from "../models/User";
+import jwt from 'jsonwebtoken';
+import verifyAuthToken from "../middellwares/auth";
 
 const userModel = new UserModel();
 const userRouter = express.Router();
 
-const getAllUsers = async (_req: Request, res: Response): Promise<void> => {
+const getAllUsers = async (req: Request, res: Response): Promise<void> => {
     try {
         const users: User[] = await userModel.index();
         res.json(users);
     } catch (e) {
         res.status(500).send(e);
+    }
+};
+
+const getMyAccount = async (req: any, res: Response): Promise<void> => {
+    try {
+        const user: User = await req.user;
+        if (!user) {
+            res.status(404).send('User not found.');
+            return;
+        }
+        res.status(200).json(user);
+
+    } catch (e) {
+        // @ts-ignore
+        res.status(500).send(e.message);
     }
 };
 
@@ -54,16 +71,24 @@ const loginUser = async (req: Request, res: Response): Promise<void> => {
         }
         const user: User = await userModel.authenticate(email, password);
 
-        res.status(200).json(user);
+        const JWT_SECRET = process.env.JWT_SECRET;
+        if (!JWT_SECRET) {
+            throw new Error('ENV Variable JWT_SECRET is Missing ');
+        }
+
+        const token = jwt.sign(user, JWT_SECRET);
+
+        res.status(200).json({user, token});
     } catch (e) {
         // @ts-ignore
         res.status(500).send(e.message);
     }
 }
 
-const updateUser = async (req: Request, res: Response): Promise<void> => {
+const updateUser = async (req: any, res: Response): Promise<void> => {
     try {
-        const userId = parseInt(req.params['id'], 10);
+        // const userId = parseInt(req.params['id'], 10);
+        const userId = req.user.id;
         const newUserData: User = req.body;
 
         if (!newUserData.firstName || !newUserData.lastName || !newUserData.email) {
@@ -85,9 +110,10 @@ const updateUser = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
-const changePassword = async (req: Request, res: Response): Promise<void> => {
+const changePassword = async (req: any, res: Response): Promise<void> => {
     try {
-        const userId = parseInt(req.params['id'], 10);
+        // const userId = parseInt(req.params['id'], 10);
+        const userId = req.user.id;
         const {oldPassword, newPassword} = req.body;
 
         if (!oldPassword || !newPassword) {
@@ -104,7 +130,14 @@ const changePassword = async (req: Request, res: Response): Promise<void> => {
 
         const updatedUser = await userModel.updateUserPassword(userId, oldPassword, newPassword);
 
-        res.status(200).json(updatedUser);
+        const JWT_SECRET = process.env.JWT_SECRET;
+        if (!JWT_SECRET) {
+            throw new Error('ENV Variable JWT_SECRET is Missing ');
+        }
+        const token = jwt.sign(updatedUser, JWT_SECRET);
+
+
+        res.status(200).json({user: updatedUser, token});
 
     } catch (e) {
         // @ts-ignore
@@ -112,14 +145,16 @@ const changePassword = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
-const deleteUser = async (req: Request, res: Response): Promise<void> => {
+const deleteUser = async (req: any, res: Response): Promise<void> => {
     try {
-        const userId = parseInt(req.params['id'], 10);
+        const userId = req.user.id;
+
+        // const userId = parseInt(req.params['id'], 10);
 
         const userToDelete: User = await userModel.show(userId);
 
         if (!userToDelete) {
-            res.status(404).send('There is no User with that id To delete.');
+            res.status(404).send('There is no User To delete.');
             return;
         }
 
@@ -132,13 +167,14 @@ const deleteUser = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
-userRouter.get('/all', getAllUsers);
-userRouter.get('/user/:id', getSingleUser);
+userRouter.get('/all', verifyAuthToken, getAllUsers);
+userRouter.get('/user/:id', verifyAuthToken, getSingleUser);
+userRouter.get('/me', verifyAuthToken, getMyAccount);
 userRouter.post('/register', register);
 userRouter.post('/login', loginUser);
-userRouter.put('/user/:id', updateUser);
-userRouter.put('/user_password/:id', changePassword);
-userRouter.delete('/user/:id', deleteUser);
+userRouter.put('/user', verifyAuthToken, updateUser);
+userRouter.put('/user_password', verifyAuthToken, changePassword);
+userRouter.delete('/user', verifyAuthToken, deleteUser);
 
 
 export default userRouter;

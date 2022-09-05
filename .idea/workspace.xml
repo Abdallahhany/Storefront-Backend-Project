@@ -2,24 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58605777-f47a-4998-b7c0-9c9f76e7f327" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/routes/user.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/middellwares/auth.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/20220829193136-products-table.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/20220829194442-user-table.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/20220829195137-orders-table.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/20220829195320-order-products-table.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/sqls/20220829193136-products-table-down.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/sqls/20220829193136-products-table-up.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/sqls/20220829194442-user-table-down.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/sqls/20220829194442-user-table-up.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/sqls/20220829195137-orders-table-down.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/sqls/20220829195137-orders-table-up.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/sqls/20220829195320-order-products-table-down.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/sqls/20220829195320-order-products-table-up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/REQUIREMENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/REQUIREMENTS.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/User.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/product.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/product.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/user.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,12 +56,24 @@
       <workItem from="1662303106510" duration="7844000" />
       <workItem from="1662317262136" duration="4232000" />
       <workItem from="1662327422691" duration="6576000" />
-      <workItem from="1662340794008" duration="4569000" />
+      <workItem from="1662340794008" duration="4765000" />
+      <workItem from="1662393359858" duration="7344000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
