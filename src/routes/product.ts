@@ -1,4 +1,4 @@
-import express, {Request, Response} from 'express'
+import express, {Request, Response} from 'express';
 import {Product, ProductModel} from "../models/Product";
 
 const productModel = new ProductModel();
@@ -63,13 +63,13 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
     try {
         const prodId = parseInt(req.params['id'], 10);
 
-        const deletedProduct: Product = await productModel.deleteProduct(prodId);
+        const productToDelete: Product = await productModel.show(prodId);
 
-        if (!deletedProduct) {
+        if (!productToDelete) {
             res.status(404).send('There is no product with that id To delete.');
             return;
-
         }
+        const deletedProduct = await productModel.deleteProduct(prodId)
 
         res.status(200).json(deletedProduct);
     } catch (e) {
