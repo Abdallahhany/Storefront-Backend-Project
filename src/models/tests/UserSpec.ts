@@ -1,4 +1,5 @@
 import {User, UserModel} from "../User";
+import client from "../../database/database";
 
 const userModel = new UserModel();
 
@@ -9,23 +10,25 @@ describe("Test User Model", () => {
         email: "test@test.com",
         password: "123456"
     }
+    beforeAll(async () => {
+        await userModel.create(defaultUser);
+    })
     it("should add new user", async () => {
+        const user: User = {
+            firstname: "testUserModel",
+            lastname: "testUserModel",
+            email: "testUserModel@test.com",
+            password: "testUserModel"
+        }
 
-        const result = await userModel.create(defaultUser);
-        expect(result.firstname).toEqual(defaultUser.firstname)
-        expect(result.lastname).toEqual(defaultUser.lastname)
-        expect(result.email).toEqual(defaultUser.email)
+        const result = await userModel.create(user);
+        expect(result.firstname).toEqual(user.firstname)
+        expect(result.lastname).toEqual(user.lastname)
+        expect(result.email).toEqual(user.email)
 
     })
 
     it('should return all users', async () => {
-        const newUser: User = {
-            firstname: "test_f1",
-            lastname: "test_l1",
-            email: "test1@test.com",
-            password: "1234567"
-        }
-        await userModel.create(newUser);
         const result = await userModel.index();
         expect(result.length).toBe(2)
     });
@@ -59,9 +62,18 @@ describe("Test User Model", () => {
         expect(result.email).toEqual(newUser.email)
     });
 
-    it('should delete user and return him',async function () {
+    it('should delete user and return him', async function () {
         await userModel.deleteUser(1);
         const result = await userModel.show(1);
         expect(result).toBeUndefined()
     });
+    afterAll(async () => {
+        const conn = await client.connect();
+
+        const sql = 'DELETE FROM order_products;\n DELETE FROM orders;\n DELETE FROM products;\n DELETE FROM users;';
+
+        await conn.query(sql);
+
+        conn.release();
+    })
 })

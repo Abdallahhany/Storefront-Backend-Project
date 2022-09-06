@@ -57,6 +57,7 @@ const register = async (req: Request, res: Response): Promise<void> => {
 
         res.status(201).json(registeredUser);
     } catch (e) {
+        console.log(e)
         // @ts-ignore
         res.status(500).send(e.message);
     }
@@ -137,7 +138,7 @@ const changePassword = async (req: any, res: Response): Promise<void> => {
         const token = jwt.sign(updatedUser, JWT_SECRET);
 
 
-        res.status(200).json({user: updatedUser, token});
+        res.status(201).json({user: updatedUser, token});
 
     } catch (e) {
         // @ts-ignore

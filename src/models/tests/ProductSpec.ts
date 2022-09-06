@@ -1,4 +1,5 @@
 import {ProductModel} from "../Product";
+import client from "../../database/database";
 
 const productModel = new ProductModel();
 
@@ -52,4 +53,13 @@ describe("Test Product Model", () => {
         expect(result).toBeUndefined()
     });
 
+    afterAll(async () => {
+        const conn = await client.connect();
+
+        const sql = 'DELETE FROM order_products;\n DELETE FROM orders;\n DELETE FROM products;\n DELETE FROM users;';
+
+        await conn.query(sql);
+
+        conn.release();
+    })
 })
