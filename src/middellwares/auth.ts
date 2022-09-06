@@ -20,7 +20,6 @@ const verifyAuthToken = (req: any, res: Response, next: NextFunction) => {
             throw new Error("Token is invalid")
         }
         req.user = decoded;
-        console.log(decoded)
         next();
     } catch (error) {
         // @ts-ignore

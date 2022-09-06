@@ -23,3 +23,4 @@ const PORT = process.env.PORT || 3000
 app.listen(PORT, function () {
     console.log(`starting app on: ${address}`);
 });
+export default app;

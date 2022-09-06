@@ -60,6 +60,29 @@ const getProductsByCat = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
+const updateProduct = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const prodId = parseInt(req.params['id'], 10);
+        const newProduct: Product = req.body;
+
+        if (!newProduct.category || !newProduct.name || !newProduct.price) {
+            throw new Error('Please fill all product requirements');
+        }
+
+        const currentProduct: Product = await productModel.show(prodId);
+
+        if (!currentProduct) {
+            res.status(404).send('There is no product with that id.');
+            return;
+        }
+        const updatedProduct = await productModel.update(prodId, newProduct);
+        res.status(201).json(updatedProduct);
+    } catch (e) {
+        // @ts-ignore
+        res.status(500).send(e.message);
+    }
+};
+
 const deleteProduct = async (req: Request, res: Response): Promise<void> => {
     try {
         const prodId = parseInt(req.params['id'], 10);
@@ -79,34 +102,12 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
-const updateProduct = async (req: Request, res: Response): Promise<void> => {
-    try {
-        const prodId = parseInt(req.params['id'], 10);
-        const newProduct: Product = req.body;
-
-        if (!newProduct.category || !newProduct.name || !newProduct.price) {
-            throw new Error('Please fill all product requirements');
-        }
-
-        const currentProduct: Product = await productModel.show(prodId);
-
-        if (!currentProduct) {
-            res.status(404).send('There is no product with that id.');
-            return;
-        }
-        const updatedProduct = await productModel.update(prodId, newProduct);
-        res.status(200).json(updatedProduct);
-    } catch (e) {
-        // @ts-ignore
-        res.status(500).send(e.message);
-    }
-};
 
 productRouter.get('/all', getAllProducts);
 productRouter.get('/product/:id', getSingleProduct);
 productRouter.post('/add', verifyAuthToken, addProduct);//token required
 productRouter.get('/product_by_cat/:cat', getProductsByCat);
-productRouter.delete('/product/:id', verifyAuthToken, deleteProduct);//token required
 productRouter.put('/product/:id', verifyAuthToken, updateProduct);//token required
+productRouter.delete('/product/:id', verifyAuthToken, deleteProduct);//token required
 
 export default productRouter;
