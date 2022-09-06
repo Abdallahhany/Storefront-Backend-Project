@@ -2,9 +2,9 @@ import Client from "../database/database";
 import bcrypt, {hash} from 'bcrypt';
 
 export type User = {
-    id: number;
-    firstName: string;
-    lastName: string;
+    id?: number;
+    firstname: string;
+    lastname: string;
     password: string;
     email: string;
 };
@@ -52,15 +52,15 @@ export class UserModel {
     async create(u: User): Promise<User> {
         try {
             const sql =
-                "INSERT INTO users (firstName, lastName, password, email) VALUES($1, $2, $3, $4) RETURNING id, firstName, lastName, email";
+                "INSERT INTO users (firstname, lastname, password, email) VALUES($1, $2, $3, $4) RETURNING id, firstName, lastName, email";
 
             const conn = await Client.connect();
 
             const hashedPassword = await hashPassword(u.password);
 
             const result = await conn.query(sql, [
-                u.firstName,
-                u.lastName,
+                u.firstname,
+                u.lastname,
                 hashedPassword,
                 u.email,
             ]);
@@ -71,7 +71,7 @@ export class UserModel {
 
             return user;
         } catch (err) {
-            throw new Error(`Could not add new user ${u.firstName}. Error: ${err}`);
+            throw new Error(`Could not add new user ${u.firstname}. Error: ${err}`);
         }
     }
 
@@ -112,13 +112,13 @@ export class UserModel {
 
     async updateUser(id: number, u: User): Promise<User> {
         try {
-            const sql = 'UPDATE users SET firstName=($1), lastName=($2), email=($3) WHERE id=($4) RETURNING *';
+            const sql = 'UPDATE users SET firstname=($1), lastname=($2), email=($3) WHERE id=($4) RETURNING *';
 
             const conn = await Client.connect();
 
             const result = await conn.query(sql, [
-                u.firstName,
-                u.lastName,
+                u.firstname,
+                u.lastname,
                 u.email,
                 id
             ]);
@@ -130,7 +130,7 @@ export class UserModel {
             return user;
         } catch (e) {
             // @ts-ignore
-            throw new Error(`Can't Update user ${u.firstName} ,error is: ${e.message}`);
+            throw new Error(`Can't Update user ${u.firstname} ,error is: ${e.message}`);
         }
 
     }

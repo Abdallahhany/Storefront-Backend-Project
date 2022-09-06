@@ -49,7 +49,7 @@ const register = async (req: Request, res: Response): Promise<void> => {
     try {
         const newUser: User = req.body;
 
-        if (!newUser.firstName || !newUser.lastName || !newUser.email || !newUser.password) {
+        if (!newUser.firstname || !newUser.lastname || !newUser.email || !newUser.password) {
             throw new Error('Please fill all user requirements');
         }
 
@@ -91,7 +91,7 @@ const updateUser = async (req: any, res: Response): Promise<void> => {
         const userId = req.user.id;
         const newUserData: User = req.body;
 
-        if (!newUserData.firstName || !newUserData.lastName || !newUserData.email) {
+        if (!newUserData.firstname || !newUserData.lastname || !newUserData.email) {
             throw new Error('Please fill all User requirements');
 
         }

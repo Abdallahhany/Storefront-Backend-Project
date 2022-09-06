@@ -4,14 +4,10 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "start": "nodemon src/server.ts",
-    "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
-    "migrate": "db-migrate --env test up && db-migrate up",
-    "test1": "ENV=test db-migrate --env test up && jasmine && db-migrate db:drop test",
-    "test": "ENV=test && db-migrate up --env test && tsc && jasmine && db-migrate reset",
+    "start": " nodemon src/server.ts",
+    "watch": "  tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
+    "test": "export NODE_ENV=test&& db-migrate up && tsc && jasmine && db-migrate reset",
     "jasmine": "jasmine",
-    "migrationup": "db-migrate up",
-    "migrationdown": "db-migrate down",
     "tsc": "tsc"
   },
   "author": "Udacity",
@@ -35,7 +31,7 @@
     "@types/pg": "^8.6.5",
     "jasmine": "^4.4.0",
     "jasmine-spec-reporter": "^7.0.0",
-    "jasmine-ts": "^0.4.0",
+    "jasmine-ts": "^0.3.0",
     "ts-node": "^10.9.1",
     "tsc-watch": "^5.0.3"
   }
