@@ -228,18 +228,23 @@ These are the notes from a meeting with the frontend developer that describe wha
   - Needed Header: Authorization - Bearer + Token
   -     /add [POST]
   - JSON Body Object:
+  - case new product
       ```json 
       {
-          'status': string,
-          'user_id': string,
+          'quantity': number,
+          'product_id': number,
       }
-      ```
+  - case add product to specific order
+      ```json 
+      {
+          'order_id':number
+          'quantity': number,
+          'product_id': number,
+      }
   - Response on success: Status 201
     ```json 
     {
-        'id': number
-        'status': string,
-        'user_id': string,
+        'msg':string
     }
     ```
 - get all orders
@@ -247,9 +252,13 @@ These are the notes from a meeting with the frontend developer that describe wha
     Response on success: Status 200
     ```json 
     [{
-        'id': number
-        'status': string,
-        'user_id': string,
+        'order id': number,
+        'quantity': number,
+        'order status': string,
+        'user first name': string,
+        'user last name': string,
+        'product name': string,
+        'product category': string,
     }]
     ```
 - get single order
@@ -257,9 +266,13 @@ These are the notes from a meeting with the frontend developer that describe wha
   - Response on success: Status 200
     ```json 
     {
-        'id': number
-        'status': string,
-        'user_id': string,
+        'order id': number,
+        'quantity': number,
+        'order status': string,
+        'user first name': string,
+        'user last name': string,
+        'product name': string,
+        'product category': string,
     }
     ```
 - get user orders
@@ -267,19 +280,22 @@ These are the notes from a meeting with the frontend developer that describe wha
     Response on success: Status 200
     ```json 
     [{
-        'id': number
-        'status': string,
-        'user_id': string,
+        'order id': number,
+        'quantity': number,
+        'order status': string,
+        'user first name': string,
+        'user last name': string,
+        'product name': string,
+        'product category': string,
     }]
     ```
-- Update order [token required]
+- Update order status [token required]
   - Needed Header: Authorization - Bearer + Token
   -     /order/:id [PUT]
   - JSON Body Object:
     ```json 
     {
         'status': string,
-        'user_id': string,
     }
     ```
   - Response on success: Status 201
@@ -296,9 +312,7 @@ These are the notes from a meeting with the frontend developer that describe wha
   - Response on success: Status 200
     ```json 
     {
-        'id': number
-        'status': string,
-        'user_id': string,
+        'msg':string
     }
     ```
 ## Data Shapes
