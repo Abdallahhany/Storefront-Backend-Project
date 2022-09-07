@@ -2,6 +2,7 @@ import express, {Request, Response} from "express";
 import bodyParser from "body-parser";
 import productRouter from "./routes/product";
 import userRouter from "./routes/user";
+import orderRouter from "./routes/order";
 
 const app: express.Application = express();
 const address: string = "0.0.0.0:3000";
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 // application middlewares
 app.use('/api/products', productRouter)
 app.use('/api/users', userRouter)
+app.use("/api/orders", orderRouter);
 
 
 //default middleware

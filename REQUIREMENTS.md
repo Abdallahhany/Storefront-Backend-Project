@@ -223,9 +223,84 @@ These are the notes from a meeting with the frontend developer that describe wha
     }
     ```
 #### Orders
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
-
+    /api/orders
+- Create [token required]
+  - Needed Header: Authorization - Bearer + Token
+  -     /add [POST]
+  - JSON Body Object:
+      ```json 
+      {
+          'status': string,
+          'user_id': string,
+      }
+      ```
+  - Response on success: Status 201
+    ```json 
+    {
+        'id': number
+        'status': string,
+        'user_id': string,
+    }
+    ```
+- get all orders
+  -     /all [GET]
+    Response on success: Status 200
+    ```json 
+    [{
+        'id': number
+        'status': string,
+        'user_id': string,
+    }]
+    ```
+- get single order
+  -     /order/:id [GET]
+  - Response on success: Status 200
+    ```json 
+    {
+        'id': number
+        'status': string,
+        'user_id': string,
+    }
+    ```
+- get user orders
+  -     /order_by_user/:id [GET]
+    Response on success: Status 200
+    ```json 
+    [{
+        'id': number
+        'status': string,
+        'user_id': string,
+    }]
+    ```
+- Update order [token required]
+  - Needed Header: Authorization - Bearer + Token
+  -     /order/:id [PUT]
+  - JSON Body Object:
+    ```json 
+    {
+        'status': string,
+        'user_id': string,
+    }
+    ```
+  - Response on success: Status 201
+    ```json 
+    {
+        'id': number
+        'status': string,
+        'user_id': string,
+    }
+    ```
+- delete
+  - Needed Header: Authorization - Bearer + Token
+  -     /order/:id [DELETE]
+  - Response on success: Status 200
+    ```json 
+    {
+        'id': number
+        'status': string,
+        'user_id': string,
+    }
+    ```
 ## Data Shapes
 #### Product
 -  id

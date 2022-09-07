@@ -168,11 +168,11 @@ const deleteUser = async (req: any, res: Response): Promise<void> => {
     }
 };
 
-userRouter.get('/all', verifyAuthToken, getAllUsers);
-userRouter.get('/user/:id', verifyAuthToken, getSingleUser);
-userRouter.get('/me', verifyAuthToken, getMyAccount);
 userRouter.post('/register', register);
 userRouter.post('/login', loginUser);
+userRouter.get('/all', verifyAuthToken, getAllUsers);
+userRouter.get('/me', verifyAuthToken, getMyAccount);
+userRouter.get('/user/:id', verifyAuthToken, getSingleUser);
 userRouter.put('/user', verifyAuthToken, updateUser);
 userRouter.put('/user_password', verifyAuthToken, changePassword);
 userRouter.delete('/user', verifyAuthToken, deleteUser);
