@@ -26,8 +26,8 @@ describe("Test Product Model", () => {
         expect(result.length).toBe(2)
     });
 
-    it('should return product with 1 id', async () => {
-        const result = await productModel.show(1);
+    it('should return product with 2 id', async () => {
+        const result = await productModel.show(2);
         expect(result.name).toEqual(product.name)
         expect(result.price).toEqual(product.price)
         expect(result.category).toEqual(product.category)
@@ -40,16 +40,16 @@ describe("Test Product Model", () => {
         expect(result[0].category).toEqual(product.category)
     });
 
-    it('should update product with id = 1', async function () {
+    it('should update product with id = 2', async function () {
         const updatedProduct = {name: 'good book', price: 2000, category: "good books"};
-        const result = await productModel.update(1, updatedProduct);
+        const result = await productModel.update(2, updatedProduct);
         expect(result.name).toEqual(updatedProduct.name)
         expect(result.price).toEqual(updatedProduct.price)
         expect(result.category).toEqual(updatedProduct.category)
     });
-    it('should delete product with id = 1 and  return it', async function () {
-        await productModel.deleteProduct(1);
-        const result = await productModel.show(1);
+    it('should delete product with id = 2 and  return it', async function () {
+        await productModel.deleteProduct(2);
+        const result = await productModel.show(2);
         expect(result).toBeUndefined()
     });
 

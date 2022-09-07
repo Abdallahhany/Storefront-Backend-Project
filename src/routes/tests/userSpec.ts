@@ -17,6 +17,12 @@ describe('Test User Routes', () => {
     beforeAll(async () => {
         await userModel.create(defaultUser);
     })
+    it('should return all users', async function () {
+        const response = await req.get("/api/users/all")
+            .set("Authorization", `Bearer ${token}`)
+        expect(response.body.length).toEqual(1);
+        expect(response.statusCode).toBe(200)
+    });
     it('should register new user', async function () {
         const user: User = {
             firstname: "tester_register",
@@ -27,16 +33,10 @@ describe('Test User Routes', () => {
         const response = await req.post("/api/users/register")
             .set("Content-type", "application/json")
             .send(user)
-        expect(response.body).toEqual({id: 4, firstname: user.firstname, lastname: user.lastname, email: user.email})
+        expect(response.body).toEqual({id: 5, firstname: user.firstname, lastname: user.lastname, email: user.email})
         expect(response.statusCode).toEqual(201)
     });
 
-    it('should return all users', async function () {
-        const response = await req.get("/api/users/all")
-            .set("Authorization", `Bearer ${token}`)
-        expect(response.body.length).toEqual(2);
-        expect(response.statusCode).toBe(200)
-    });
     let defaultUserTokenAfterLogin: string;
 
     it('should return user and token if email and password is correct', async function () {
@@ -55,8 +55,8 @@ describe('Test User Routes', () => {
         expect(response.statusCode).toEqual(200)
     });
 
-    it('should return user with id 3', async function () {
-        const response = await req.get('/api/users/user/3')
+    it('should return user with id 4', async function () {
+        const response = await req.get('/api/users/user/4')
             .set("Authorization", `Bearer ${defaultUserTokenAfterLogin}`)
         expect(response.body.firstname).toEqual(defaultUser.firstname)
         expect(response.body.lastname).toEqual(defaultUser.lastname)

@@ -43,7 +43,7 @@ describe("Test User Model", () => {
     it('should update my password case entered password is correct', async function () {
         const oldPassword = defaultUser.password;
         const newPassword = "123456789";
-        const result = await userModel.updateUserPassword(1, oldPassword, newPassword);
+        const result = await userModel.updateUserPassword(2, oldPassword, newPassword);
         expect(result.firstname).toEqual(defaultUser.firstname)
         expect(result.lastname).toEqual(defaultUser.lastname)
         expect(result.email).toEqual(defaultUser.email)
@@ -56,15 +56,15 @@ describe("Test User Model", () => {
             email: "testupdate@test.com",
             password: "123456"
         }
-        const result = await userModel.updateUser(1, newUser);
+        const result = await userModel.updateUser(2, newUser);
         expect(result.firstname).toEqual(newUser.firstname)
         expect(result.lastname).toEqual(newUser.lastname)
         expect(result.email).toEqual(newUser.email)
     });
 
     it('should delete user and return him', async function () {
-        await userModel.deleteUser(1);
-        const result = await userModel.show(1);
+        await userModel.deleteUser(2);
+        const result = await userModel.show(2);
         expect(result).toBeUndefined()
     });
     afterAll(async () => {
