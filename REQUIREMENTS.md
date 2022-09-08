@@ -321,12 +321,32 @@ These are the notes from a meeting with the frontend developer that describe wha
 - name
 - price
 - [OPTIONAL] category
-
+```postgresql
+CREATE TABLE products
+(
+    id       SERIAL PRIMARY KEY,
+    name     VARCHAR(50) NOT NULL,
+    price    integer     NOT NULL,
+    category VARCHAR(50) NOT NULL
+);
+```
+![](screenshots/products.png)
 #### User
 - id
 - firstName
 - lastName
 - password
+```postgresql
+CREATE TABLE users
+(
+    id        SERIAL PRIMARY KEY,
+    firstname VARCHAR(50) NOT NULL,
+    lastname  VARCHAR(50) NOT NULL,
+    password  VARCHAR(255) NOT NULL,
+    email     VARCHAR(255) UNIQUE
+);
+```
+![](screenshots/users.png)
 
 #### Orders
 - id
@@ -334,4 +354,25 @@ These are the notes from a meeting with the frontend developer that describe wha
 - quantity of each product in the order
 - user_id
 - status of order (active or complete)
+```postgresql
+CREATE TABLE orders
+(
+    id      SERIAL PRIMARY KEY,
+    status  VARCHAR(15),
+    user_id bigint REFERENCES users (id)
+);
+```
+![](screenshots/orders.png)
 
+```postgresql
+CREATE TABLE order_products
+(
+    id         SERIAL PRIMARY KEY,
+    quantity   integer,
+    order_id   bigint REFERENCES orders (id),
+    product_id bigint REFERENCES products (id)
+);
+```
+![](screenshots/order-products.png)
+
+![](screenshots/test_result.png)

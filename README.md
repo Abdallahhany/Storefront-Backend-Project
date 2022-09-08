@@ -62,7 +62,28 @@ BCRYPT_PASSWORD=
 SALT_ROUNDS=
 JWT_SECRET=
 ```
-
+for connecting backend with database do the following:
+ - in the terminal `su postgres`
+ - start psql `psql postgres`
+ - in psql run the following:
+   - `CREATE USER shopping_user WITH PASSWORD 'password123';`
+   - `CREATE DATABASE shopping_dev;`
+   - `\c shopping_dev`
+   - `GRANT ALL PRIVILEGES ON DATABASE shopping_dev TO shopping_user;`
+ - to create database for testing:
+   - `CREATE DATABASE shopping_db_test;`
+   - `GRANT ALL PRIVILEGES ON DATABASE shopping_db_test TO shopping_user;`
+ - edit your .env to contain the following 
+    - 
+    ```
+     PORT=3000
+     POSTGRES_HOST=127.0.0.1 //default port of postgres is 5432
+     POSTGRES_DB=shopping_dev
+     POSTGRES_TEST_DB=shopping_db_test
+     POSTGRES_USER=shopping_user
+     POSTGRES_PASSWORD=password123
+     NODE_ENV=dev
+     ```
 4- Run the project:
 
 ```
@@ -88,5 +109,6 @@ npm run watch
 ```
 npm run tests
 ```
+if you work on window not linux replace `export` with `set` in test script
 ## Author:
 * [Abdallah Rashed](https://github.com/Abdallahhany)

@@ -5,7 +5,6 @@ import app from "../../server";
 const userModel = new UserModel();
 
 const req = supertest(app);
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0ZXJAdGVzdC5jb20iLCJmaXJzdG5hbWUiOiJ0ZXN0ZXIiLCJsYXN0bmFtZSI6InRlc3RlciIsImlhdCI6MTY2MjQ5ODY2OH0._rdmxcjvtoPme7P4XenUzBpyAbivMrwenPY4rw_5AMw';
 
 describe('Test User Routes', () => {
     const defaultUser: User = {
@@ -17,9 +16,20 @@ describe('Test User Routes', () => {
     beforeAll(async () => {
         await userModel.create(defaultUser);
     })
+    let defaultUserTokenAfterLogin: string;
+
+    it('should return user and token if email and password is correct', async function () {
+        const response = await req.post('/api/users/login')
+            .send(defaultUser)
+        expect(response.statusCode).toEqual(200)
+        expect(response.body.token).toBeDefined()
+        defaultUserTokenAfterLogin = response.body.token;
+        expect(response.body.user).toBeDefined()
+    });
+
     it('should return all users', async function () {
         const response = await req.get("/api/users/all")
-            .set("Authorization", `Bearer ${token}`)
+            .set("Authorization", `Bearer ${defaultUserTokenAfterLogin}`)
         expect(response.body.length).toEqual(1);
         expect(response.statusCode).toBe(200)
     });
@@ -34,23 +44,12 @@ describe('Test User Routes', () => {
             .set("Content-type", "application/json")
             .send(newUser)
         expect(response.body).toEqual({
-            id: 6,
+            id: 7,
             firstname: newUser.firstname,
             lastname: newUser.lastname,
             email: newUser.email
         })
         expect(response.statusCode).toEqual(201)
-    });
-
-    let defaultUserTokenAfterLogin: string;
-
-    it('should return user and token if email and password is correct', async function () {
-        const response = await req.post('/api/users/login')
-            .send(defaultUser)
-        expect(response.statusCode).toEqual(200)
-        expect(response.body.token).toBeDefined()
-        defaultUserTokenAfterLogin = response.body.token;
-        expect(response.body.user).toBeDefined()
     });
 
     it('should return my account', async function () {
@@ -60,8 +59,8 @@ describe('Test User Routes', () => {
         expect(response.statusCode).toEqual(200)
     });
 
-    it('should return user with id 5', async function () {
-        const response = await req.get('/api/users/user/5')
+    it('should return user with id 6', async function () {
+        const response = await req.get('/api/users/user/6')
             .set("Authorization", `Bearer ${defaultUserTokenAfterLogin}`)
         expect(response.body.firstname).toEqual(defaultUser.firstname)
         expect(response.body.lastname).toEqual(defaultUser.lastname)
@@ -104,7 +103,7 @@ describe('Test User Routes', () => {
         let response = await req.delete('/api/users/user')
             .set("Authorization", `Bearer ${newTokenAfterChangePassword}`)
         expect(response.statusCode).toEqual(200)
-        response = await req.get('/api/users/user/5')
+        response = await req.get('/api/users/user/6')
             .set("Authorization", `Bearer ${newTokenAfterChangePassword}`)
         expect(response.body).toEqual({})
     });

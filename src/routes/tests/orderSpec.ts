@@ -9,7 +9,7 @@ const productModel = new ProductModel();
 const userModel = new UserModel();
 
 const req = supertest(app);
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJ1c2VyVGVzdE9yZGVyUm91dGVAdGVzdC5jb20iLCJmaXJzdG5hbWUiOiJ1c2VyVGVzdE9yZGVyUm91dGUiLCJsYXN0bmFtZSI6InVzZXJUZXN0T3JkZXJSb3V0ZSIsImlhdCI6MTY2MjU5NjExOH0.wDMj8wyhk02hASMJGAi6qDr3HCA3sUfHbIFSO6bRlVU';
+let token: string;
 
 describe('Order API Routes', () => {
 
@@ -39,6 +39,9 @@ describe('Order API Routes', () => {
     beforeAll(async () => {
         await productModel.create(product)
         await userModel.create(user)
+        const response = await req.post('/api/users/login')
+            .send(user)
+        token = response.body.token;
     });
 
     it('should create new order', async function () {

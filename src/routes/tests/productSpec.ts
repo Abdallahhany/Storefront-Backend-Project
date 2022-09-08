@@ -1,13 +1,14 @@
 import supertest from "supertest";
 import {Product, ProductModel} from "../../models/Product";
+
 import app from "../../server";
 import client from "../../database/database";
+import {User} from "../../models/User";
 
 const productModel = new ProductModel();
 
 const req = supertest(app);
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImZpcnN0bmFtZSI6InRlc3QiLCJsYXN0bmFtZSI6InRlc3QiLCJpYXQiOjE2NjI0ODAxNTh9.B0DluHTxRGQVlx2sLes1riTIbc4Xywke92Ol8nKLR1o';
-
+let token: string;
 describe('Product API Routes', () => {
 
     const product: Product = {
@@ -15,9 +16,21 @@ describe('Product API Routes', () => {
         price: 200,
         category: "Books"
     }
-
+    const defaultUser: User = {
+        firstname: "tester",
+        lastname: "tester",
+        email: "tester@test.com",
+        password: "test@123"
+    }
     beforeAll(async () => {
         await productModel.create(product);
+        await req.post("/api/users/register")
+            .set("Content-type", "application/json")
+            .send(defaultUser)
+        const response = await req.post('/api/users/login')
+            .set("Content-type", "application/json")
+            .send(defaultUser)
+        token = response.body.token;
     });
 
     it('should add new product and return it to user', async function () {
