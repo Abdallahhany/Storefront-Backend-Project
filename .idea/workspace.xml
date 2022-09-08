@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58605777-f47a-4998-b7c0-9c9f76e7f327" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/screenshots/order-products.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/screenshots/orders.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/screenshots/products.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/screenshots/users.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/REQUIREMENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/REQUIREMENTS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/tests/productSpec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/tests/productSpec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/tests/userSpec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/tests/userSpec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_result.png" beforeDir="false" afterPath="$PROJECT_DIR$/screenshots/test_result.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,18 +25,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/rashed/Abdallah Rashed/Egypt FWD Nano-degree/projects/Storefront Backend Project/screenshots/products.png",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "vcs.Git",
-    "ts.external.directory.path": "/home/rashed/Abdallah Rashed/Egypt FWD Nano-degree/projects/Storefront Backend Project/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/rashed/Abdallah Rashed/Egypt FWD Nano-degree/projects/Storefront Backend Project/screenshots/products.png&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/rashed/Abdallah Rashed/Egypt FWD Nano-degree/projects/Storefront Backend Project/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/screenshots" />
@@ -74,7 +66,8 @@
       <workItem from="1662478315603" duration="20987000" />
       <workItem from="1662564349800" duration="10507000" />
       <workItem from="1662590366827" duration="10441000" />
-      <workItem from="1662646403703" duration="2767000" />
+      <workItem from="1662646403703" duration="3437000" />
+      <workItem from="1662658622853" duration="55000" />
     </task>
     <servers />
   </component>
