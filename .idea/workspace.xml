@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58605777-f47a-4998-b7c0-9c9f76e7f327" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/routes/tests/orderSpec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.udacity.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Order.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Order.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/order.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/order.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/tests/productSpec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/tests/productSpec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/tests/userSpec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/tests/userSpec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +62,7 @@
       <workItem from="1662423075959" duration="7758000" />
       <workItem from="1662478315603" duration="20987000" />
       <workItem from="1662564349800" duration="10507000" />
-      <workItem from="1662590366827" duration="7875000" />
+      <workItem from="1662590366827" duration="9995000" />
     </task>
     <servers />
   </component>

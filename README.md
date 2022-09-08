@@ -1,11 +1,32 @@
-# Storefront Backend Project
+# Storefront backend Project
 
-## Getting Started
+## Second Project of Advanced Full-Stack Web Development Nanodegree Program with Udacity ( Egypt FWD )
 
-This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `yarn` in your terminal at the project root.
+### Overview:
 
-## Required Technologies
+It provides an express application serving several API endpoints for storing and accessing data, located in a postgres
+database. It serves routes for users, orders and products. It uses JWT Token for authorization.
+
+### API Reference:
+
+Go to the `REQUIREMENTS.md` file for the API Endpoint reference and data shape documentation.
+
+### Tech
+
+Storefront uses a number of open source projects to work:
+
+* [NodeJS](https://nodejs.org/en/) - Event I/O for the backend
+* [ExpressJS](https://expressjs.com) - Fast, opinionated, minimalist web framework for NodeJS
+* [postgresql](https://www.postgresql.org/) -PostgreSQL is a powerful, open source object-relational database system
+* [JSONWebToken](https://jwt.io) - Used for authorization and authentication
+* [Jasmin](https://jasmine.github.io/) - Jasmine is a behavior-driven development framework for testing JavaScript code.
+* [Typescript](https://www.typescriptlang.org/) - TypeScript is a strongly typed programming language that builds on
+  JavaScript, giving you better tooling at any scale.
+
+## Required Technologies:
+
 Your application must make use of the following libraries:
+
 - Postgres for the database
 - Node/Express for the application logic
 - dotenv from npm for managing environment variables
@@ -13,42 +34,59 @@ Your application must make use of the following libraries:
 - jsonwebtoken from npm for working with JWTs
 - jasmine from npm for testing
 
-## Steps to Completion
+## How to use the project:
 
-### 1. Plan to Meet Requirements
+1- clone the repo:
 
-In this repo there is a `REQUIREMENTS.md` document which outlines what this API needs to supply for the frontend, as well as the agreed upon data shapes to be passed between front and backend. This is much like a document you might come across in real life when building or extending an API. 
+```
+git clone https://github.com/Abdallahhany/Storefront-Backend-Project
+```
 
-Your first task is to read the requirements and update the document with the following:
-- Determine the RESTful route for each endpoint listed. Add the RESTful route and HTTP verb to the document so that the frontend developer can begin to build their fetch requests.    
-**Example**: A SHOW route: 'blogs/:id' [GET] 
+2- install required dependencies :
 
-- Design the Postgres database tables based off the data shape requirements. Add to the requirements document the database tables and columns being sure to mark foreign keys.   
-**Example**: You can format this however you like but these types of information should be provided
-Table: Books (id:varchar, title:varchar, author:varchar, published_year:varchar, publisher_id:string[foreign key to publishers table], pages:number)
+```
+npm install
+```
 
-**NOTE** It is important to remember that there might not be a one to one ratio between data shapes and database tables. Data shapes only outline the structure of objects being passed between frontend and API, the database may need multiple tables to store a single shape. 
+3- add `.env` file which contain:
 
-### 2.  DB Creation and Migrations
+```
+PORT=
+POSTGRES_HOST=
+POSTGRES_DB=
+POSTGRES_TEST_DB=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+NODE_ENV=
+BCRYPT_PASSWORD=
+SALT_ROUNDS=
+JWT_SECRET=
+```
 
-Now that you have the structure of the databse outlined, it is time to create the database and migrations. Add the npm packages dotenv and db-migrate that we used in the course and setup your Postgres database. If you get stuck, you can always revisit the database lesson for a reminder. 
+4- Run the project:
 
-You must also ensure that any sensitive information is hashed with bcrypt. If any passwords are found in plain text in your application it will not pass.
+```
+npm run start
+```
 
-### 3. Models
+## Scripts:
 
-Create the models for each database table. The methods in each model should map to the endpoints in `REQUIREMENTS.md`. Remember that these models should all have test suites and mocks.
+1- To Build js project:
 
-### 4. Express Handlers
+```
+npm run tsc
+```
 
-Set up the Express handlers to route incoming requests to the correct model method. Make sure that the endpoints you create match up with the enpoints listed in `REQUIREMENTS.md`. Endpoints must have tests and be CORS enabled. 
+2- Start the dev server
 
-### 5. JWTs
+```
+npm run watch
+```
 
-Add JWT functionality as shown in the course. Make sure that JWTs are required for the routes listed in `REQUIUREMENTS.md`.
+3- To run tests
 
-### 6. QA and `README.md`
-
-Before submitting, make sure that your project is complete with a `README.md`. Your `README.md` must include instructions for setting up and running your project including how you setup, run, and connect to your database. 
-
-Before submitting your project, spin it up and test each endpoint. If each one responds with data that matches the data shapes from the `REQUIREMENTS.md`, it is ready for submission!
+```
+npm run tests
+```
+## Author:
+* [Abdallah Rashed](https://github.com/Abdallahhany)
