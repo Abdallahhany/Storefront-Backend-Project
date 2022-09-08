@@ -24,7 +24,7 @@ describe('Test User Routes', () => {
         expect(response.statusCode).toBe(200)
     });
     it('should register new user', async function () {
-        const user: User = {
+        const newUser: User = {
             firstname: "tester_register",
             lastname: "tester_register",
             email: "tester_register@test.com",
@@ -32,8 +32,13 @@ describe('Test User Routes', () => {
         }
         const response = await req.post("/api/users/register")
             .set("Content-type", "application/json")
-            .send(user)
-        expect(response.body).toEqual({id: 5, firstname: user.firstname, lastname: user.lastname, email: user.email})
+            .send(newUser)
+        expect(response.body).toEqual({
+            id: 6,
+            firstname: newUser.firstname,
+            lastname: newUser.lastname,
+            email: newUser.email
+        })
         expect(response.statusCode).toEqual(201)
     });
 
@@ -55,8 +60,8 @@ describe('Test User Routes', () => {
         expect(response.statusCode).toEqual(200)
     });
 
-    it('should return user with id 4', async function () {
-        const response = await req.get('/api/users/user/4')
+    it('should return user with id 5', async function () {
+        const response = await req.get('/api/users/user/5')
             .set("Authorization", `Bearer ${defaultUserTokenAfterLogin}`)
         expect(response.body.firstname).toEqual(defaultUser.firstname)
         expect(response.body.lastname).toEqual(defaultUser.lastname)
@@ -99,7 +104,7 @@ describe('Test User Routes', () => {
         let response = await req.delete('/api/users/user')
             .set("Authorization", `Bearer ${newTokenAfterChangePassword}`)
         expect(response.statusCode).toEqual(200)
-        response = await req.get('/api/users/user/3')
+        response = await req.get('/api/users/user/5')
             .set("Authorization", `Bearer ${newTokenAfterChangePassword}`)
         expect(response.body).toEqual({})
     });

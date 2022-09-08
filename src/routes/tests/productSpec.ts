@@ -1,5 +1,4 @@
 import supertest from "supertest";
-import {User, UserModel} from "../../models/User";
 import {Product, ProductModel} from "../../models/Product";
 import app from "../../server";
 import client from "../../database/database";
@@ -40,16 +39,16 @@ describe('Product API Routes', () => {
         expect(response.body.length).toBe(2)
     });
 
-    it('should return single product with id = 4', async function () {
-        const response = await req.get(`/api/products/product/4`)
+    it('should return single product with id = 5', async function () {
+        const response = await req.get(`/api/products/product/5`)
         expect(response.statusCode).toEqual(200)
-        expect(response.body).toEqual({id: 4, ...product})
+        expect(response.body).toEqual({id: 5, ...product})
     });
 
     it('should return products by category', async function () {
         const response = await req.get(`/api/products/product_by_cat/${product.category}`)
         expect(response.statusCode).toEqual(200)
-        expect(response.body).toEqual([{id: 4, ...product}])
+        expect(response.body).toEqual([{id: 5, ...product}])
     });
 
     it('should update Product and return it', async function () {
@@ -58,16 +57,16 @@ describe('Product API Routes', () => {
             price: 250,
             category: "updated Books"
         }
-        const response = await req.put(`/api/products/product/4`)
+        const response = await req.put(`/api/products/product/5`)
             .set("content-type", "application/json")
             .set("Authorization", `Bearer ${token}`)
             .send(updatedProduct);
-        expect(response.body).toEqual({id: 4, ...updatedProduct})
+        expect(response.body).toEqual({id: 5, ...updatedProduct})
         expect(response.statusCode).toEqual(201)
     });
 
-    it('should delete product with id 4 and return it', async function () {
-        const response = await req.delete(`/api/products/product/4`)
+    it('should delete product with id 5 and return it', async function () {
+        const response = await req.delete(`/api/products/product/5`)
             .set("content-type", "application/json")
             .set("Authorization", `Bearer ${token}`)
         expect(response.statusCode).toBe(200)

@@ -40,6 +40,7 @@ export class OrderModel {
             conn.release()
             return result.rows;
         } catch (e) {
+            console.log(e)
             throw new Error(`Cannot create order, Error${e}`);
         }
 

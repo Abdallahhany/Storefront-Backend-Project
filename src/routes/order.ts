@@ -13,9 +13,6 @@ const getAllOrders = async (req: Request, res: Response) => {
         if (!orders) {
             throw new Error("there is no orders found")
         }
-        orders.forEach(order => {
-
-        })
         res.status(200).json(orders);
     } catch (error) {
         // @ts-ignore
