@@ -1,6 +1,6 @@
 # Storefront backend Project
 
-## Second Project of Advanced Full-Stack Web Development Nanodegree Program with Udacity ( Egypt FWD )
+## Second Project of Advanced Backend Web Development Nanodegree Program with Udacity ( Egypt FWD )
 
 ### Overview:
 
